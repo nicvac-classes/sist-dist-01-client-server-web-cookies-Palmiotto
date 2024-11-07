@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser'); 
+const cookieParser = require('cookie-parser'); // Da aggiungere
 const app = express();
 
 // Configurazione EJS
@@ -25,6 +25,11 @@ app.post('/greet', (req, res) => {
     // Imposta un cookie chiamato "name" con valore l'input dell'utente
     res.cookie('name', name, { maxAge: 24 * 60 * 60 * 1000 }); 
     res.render('greet', { message:'Benvenuto', name: name });
+});
+
+app.post('/logout', (req, res) => {
+    res.clearCookie('name'); // Cancella il cookie chiamato "name"
+    res.redirect('/'); // Reindirizza alla home page
 });
 
 const PORT = 3000;
